@@ -9,6 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <Header />
@@ -41,35 +42,37 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           <strong>Research:</strong> My work investigates how autonomous vehicles make routing decisions.
           I develop multi-agent reinforcement learning models to simulate and optimize their interactions within dynamic traffic networks.
         </p>
-		<p>
-          <strong>News:</strong> 
-		  <ul>
-			<li>
-				I am currently undertaking a six-month research visit at 
-				<strong>ETH Zurich</strong> within the 
-				<strong>Institute for Transport Planning and Systems (IVT)</strong>. 
-				My work focuses on congestion pricing and fairness in multi-agent traffic systems, 
-				leveraging multi-agent reinforcement learning methods. The visit is jointly supervised by 
-				<a href="https://www.ivt.ethz.ch/en/people/profile.anastasios-kouvelas.html"> Dr. Anastasios Kouvelas </a> and <a href="https://www.michailmakridis.com/>"Dr. Michalis Makridis </a>, 
-				and supported by the “Excellence Initiative – Research University” grant of Jagiellonian University.
-			</li>
 
-		  	<li>Our paper 
-				<a href="https://example.com">
-					<em>URB -- Urban Routing Benchmark for RL-equipped Connected Autonomous Vehicles</em>
-				</a> 
-				got accepted to NeurIPS 2025 in San Diego.
-			</li>
-			<li>
-				Our paper 
-				<a href="https://www.sciencedirect.com/science/article/pii/S2352711025002468">
-					<em>RouteRL: Multi-agent reinforcement learning framework for urban route choice with autonomous vehicles</em>
-				</a> 
-				got published in SoftwareX journal.
-			</li>
+        <h3 class="section-title">News</h3>
+        <ul class="news">
+          <li>
+            I am currently undertaking a six-month research visit at
+            <strong>ETH Zurich</strong> within the
+            <strong>Institute for Transport Planning and Systems (IVT)</strong>.
+            My work focuses on congestion pricing and fairness in multi-agent traffic systems,
+            leveraging multi-agent reinforcement learning methods. The visit is jointly supervised by
+            <a href="https://www.ivt.ethz.ch/en/people/profile.anastasios-kouvelas.html">Dr. Anastasios Kouvelas</a>
+            and
+            <a href="https://www.michailmakridis.com/">Dr. Michalis Makridis</a>,
+            and supported by the “Excellence Initiative – Research University” grant of Jagiellonian University.
+          </li>
 
-		  </ul>
-		</p>
+          <li>
+            Our paper
+            <a href="https://example.com">
+              <em>URB -- Urban Routing Benchmark for RL-equipped Connected Autonomous Vehicles</em>
+            </a>
+            got accepted to NeurIPS 2025 in San Diego.
+          </li>
+
+          <li>
+            Our paper
+            <a href="https://www.sciencedirect.com/science/article/pii/S2352711025002468">
+              <em>RouteRL: Multi-agent reinforcement learning framework for urban route choice with autonomous vehicles</em>
+            </a>
+            got published in <em>SoftwareX</em> journal.
+          </li>
+        </ul>
       </section>
     </main>
     <Footer />
@@ -77,43 +80,48 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <style>
       /* Layout */
       .layout {
+        --rail-min: 120px;       /* smallest left column on tiny screens */
+        --rail-max: 240px;       /* cap the left column on wide screens  */
+        --gap: 1.25rem;
+
         max-width: 1100px;
         margin: 0 auto;
         padding: 2rem 1rem;
         display: grid;
-        grid-template-columns: 280px 1fr;
-        gap: 2rem;
+        grid-template-columns: minmax(var(--rail-min), var(--rail-max)) 1fr;
+        gap: var(--gap);
         align-items: start;
       }
 
       /* Left column */
       .sidebar {
         position: sticky;
-        top: 1rem; /* keeps the left panel visible while scrolling on desktop */
+        top: 1rem;
       }
 
       .name {
         margin: 0 0 0.25rem 0;
-        font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+        font-size: clamp(1.2rem, 2.2vw, 1.8rem);
         line-height: 1.2;
       }
 
       .email {
-        margin: 0 0 1rem 0;
+        margin: 0 0 0.75rem 0;
         word-break: break-word;
+        font-size: 0.95rem;
       }
 
       .avatar {
         display: block;
         width: 100%;
-        max-width: 220px;
         height: auto;
         border-radius: 8px;
-        margin: 0 0 1rem 0;
+        margin: 0 0 0.75rem 0;
+        object-fit: cover;
       }
 
       .tags {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         color: var(--text-dim, #555);
       }
 
@@ -124,17 +132,65 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         font-size: 1.02rem;
       }
 
-      /* Responsive */
-      @media (max-width: 800px) {
+      .section-title {
+        margin: 1.25rem 0 0.5rem 0;
+        font-size: 1.1rem;
+      }
+
+      .news {
+        margin: 0 0 1rem 1.1rem;
+        padding: 0;
+      }
+
+      .news li + li {
+        margin-top: 0.6rem;
+      }
+
+      /* Tablet adjustments */
+      @media (max-width: 900px) {
         .layout {
-          grid-template-columns: 1fr;
-        }
-        .sidebar {
-          position: static;
+          padding: 1.5rem 1rem;
+          --rail-max: 200px;
+          --gap: 1rem;
         }
         .avatar {
           max-width: 180px;
         }
+      }
+
+      /* Keep two columns on phones, but tighten spacing and shrink the left rail */
+      @media (max-width: 640px) {
+        .layout {
+          --rail-min: 96px;
+          --rail-max: 140px;
+          --gap: 0.75rem;
+        }
+        .sidebar {
+          position: static; /* avoid sticky jumpiness on small screens */
+        }
+        .avatar {
+          max-width: 120px;
+          border-radius: 6px;
+        }
+        .name { font-size: 1.05rem; }
+        .email, .tags { font-size: 0.88rem; }
+        .content p, .news { font-size: 0.98rem; }
+      }
+
+      /* Ultra-small devices */
+      @media (max-width: 380px) {
+        .layout {
+          --rail-min: 84px;
+          --rail-max: 110px;
+          padding: 1rem 0.75rem;
+        }
+        .avatar { max-width: 100px; }
+        .news { margin-left: 0.9rem; }
+      }
+
+      /* Respect user's reduced motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        * { scroll-behavior: auto !important; }
       }
     </style>
   </body>
