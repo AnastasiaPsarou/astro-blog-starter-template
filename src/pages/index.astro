@@ -7,35 +7,106 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h2> Anastasia Psarou</h1>
-			<p><a href="mailto:anastasia.psarou@uj.edu.pl">anastasia.psarou@uj.edu.pl</a></p>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="layout">
+      <aside class="sidebar">
+        <h2 class="name">Anastasia Psarou</h2>
+        <p class="email">
+          <a href="mailto:anastasia.psarou@uj.edu.pl">anastasia.psarou@uj.edu.pl</a>
+        </p>
+        <img
+          src="anastasia.png"
+          alt="Photo of Anastasia Psarou"
+          width="200"
+          height="200"
+          class="avatar"
+        />
+        <p class="tags">Multi-agent systems · Reinforcement learning · Agent-based modeling · Transportation</p>
+      </aside>
 
-			<p>
-			Multi-agent systems · Reinforcement learning · Agent-based modeling · Transportation
-			</p>
+      <section class="content">
+        <p>
+          <strong>Current role:</strong> I am a second-year PhD student at the
+          <a href="https://www.uj.edu.pl/">Jagiellonian University</a>, working under the supervision of
+          Professor <a href="https://www.rafalkucharskilab.pl/">Rafał Kucharski</a>.
+          My research is conducted within the
+          <a href="https://github.com/COeXISTENCE-PROJECT">COeXISTENCE</a> project, funded by the European Research Council (ERC).
+        </p>
 
-			<img src="anastasia.png" alt="Photo of Anastasia Psarou" width="200">
+        <p>
+          <strong>Research:</strong> My work investigates how autonomous vehicles make routing decisions.
+          I develop multi-agent reinforcement learning models to simulate and optimize their interactions within dynamic traffic networks.
+        </p>
+      </section>
+    </main>
+    <Footer />
 
-			<p>
-			<strong>Current role:</strong> I am a second-year PhD student at the 
-			<a href="https://www.uj.edu.pl/">Jagiellonian University</a>, working under the supervision of 
-			Professor <a href="https://www.rafalkucharskilab.pl/">Rafał Kucharski</a>. 
-			My research is conducted within the 
-			<a href="https://github.com/COeXISTENCE-PROJECT">COeXISTENCE</a> project, funded by the European Research Council (ERC).
-			</p>
+    <style>
+      /* Layout */
+      .layout {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
 
-			<p>
-			<strong>Research:</strong> My work investigates how autonomous vehicles make routing decisions. 
-			I develop multi-agent reinforcement learning models to simulate and optimize their interactions within dynamic traffic networks.
-			</p>
+      /* Left column */
+      .sidebar {
+        position: sticky;
+        top: 1rem; /* keeps the left panel visible while scrolling on desktop */
+      }
 
-		</main>
-		<Footer />
-	</body>
+      .name {
+        margin: 0 0 0.25rem 0;
+        font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+        line-height: 1.2;
+      }
+
+      .email {
+        margin: 0 0 1rem 0;
+        word-break: break-word;
+      }
+
+      .avatar {
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+        border-radius: 8px;
+        margin: 0 0 1rem 0;
+      }
+
+      .tags {
+        font-size: 0.95rem;
+        color: var(--text-dim, #555);
+      }
+
+      /* Right column */
+      .content p {
+        margin: 0 0 1rem 0;
+        line-height: 1.65;
+        font-size: 1.02rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 800px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: static;
+        }
+        .avatar {
+          max-width: 180px;
+        }
+      }
+    </style>
+  </body>
 </html>
