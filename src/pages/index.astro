@@ -43,7 +43,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           I develop multi-agent reinforcement learning models to simulate and optimize their interactions within dynamic traffic networks.
         </p>
 
-        <h3 class="section-title">News</h3>
+        <h3 class="section-title">News:</h3>
         <ul class="news">
           <li>
             I am currently undertaking a six-month research visit at
@@ -254,6 +254,48 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	/* If your nav is wide, allow horizontal scroll instead of wrapping to a second line */
 	header nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 	}
+
+		/* General safety: don't clip header content */
+	.site-header,
+	.site-header .container {
+	overflow: visible;
+	}
+
+	/* Desktop keeps row layout */
+	.site-header .container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	}
+
+	/* Mobile: stack brand and nav, allow wrapping */
+	@media (max-width: 640px) {
+	.site-header .container {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
+
+	.site-header nav {
+		width: 100%;
+	}
+
+	.site-header nav ul {
+		display: flex;
+		flex-wrap: wrap;   /* <- key: wraps to next line */
+		gap: 0.5rem 0.75rem;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.site-header nav a {
+		display: inline-block;
+		text-decoration: none;
+		font-weight: 500;
+	}
+	}
+
 
     </style>
   </body>
