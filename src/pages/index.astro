@@ -132,6 +132,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         font-size: 1.02rem;
       }
 
+	  .news li {
+		font-size: 1.02rem;   /* match .content p */
+		line-height: 1.65;
+		}
+
+
       .section-title {
         margin: 1.25rem 0 0.5rem 0;
         font-size: 1.1rem;
@@ -192,6 +198,63 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       @media (prefers-reduced-motion: reduce) {
         * { scroll-behavior: auto !important; }
       }
+
+	/* 1) Make the page/base background white */
+	html, body {
+	background: #fff;
+	}
+
+	/* 2) Ensure the left rail has no grey background */
+	.sidebar,
+	.layout > .sidebar {
+	background: transparent !important;
+	box-shadow: none !important;
+	}
+
+	/* 3) Keep two columns on phones, but cap the left rail so it never looks like a big grey block */
+	@media (max-width: 640px) {
+	.layout {
+		grid-template-columns: 110px 1fr; /* narrow left rail + flexible right */
+		gap: 0.75rem;
+	}
+	.sidebar {
+		position: static; /* avoid sticky jumpiness on mobile */
+	}
+	.avatar { max-width: 110px; }
+	}
+
+	/* 4) Header: give it a solid background + better contrast for links */
+	header, .site-header, header[role="banner"] {
+	position: sticky;   /* optional; remove if not desired */
+	top: 0;
+	z-index: 100;
+	background: #fff;   /* ensures links sit on white, not over content behind */
+	border-bottom: 1px solid rgba(0,0,0,0.06);
+	}
+
+	/* Make nav items wrap and be readable */
+	header nav, .site-nav, header .nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	align-items: center;
+	}
+
+	/* Increase contrast for header links */
+	header a, header nav a, .site-header a {
+	color: #111 !important;         /* visible on white */
+	text-decoration: none;
+	font-weight: 500;
+	}
+	header a:visited { color: #111 !important; }
+
+	/* Slightly smaller links on very small screens so they fit */
+	@media (max-width: 480px) {
+	header nav a, .site-header a { font-size: 0.95rem; }
+	/* If your nav is wide, allow horizontal scroll instead of wrapping to a second line */
+	header nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+	}
+
     </style>
   </body>
 </html>
